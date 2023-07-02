@@ -1,6 +1,8 @@
 function rrt_plot(RRTState)
     hold on
-    fill([0, RRTState.Dimensions.Width, RRTState.Dimensions.Width, 0], [0, 0, RRTState.Dimensions.Length, RRTState.Dimensions.Length], RRTState.Terraincolour);
+    fill([0, RRTState.Dimensions.Width, RRTState.Dimensions.Width, 0],...
+        [0, 0, RRTState.Dimensions.Length, RRTState.Dimensions.Length],...
+        RRTState.Terraincolour);
     scatter(RRTState.PointA(1), RRTState.PointA(2), 'filled', 'MarkerFaceColor', 'red');
     scatter(RRTState.PointB(1), RRTState.PointB(2), 'filled', 'MarkerFaceColor', 'green');
     %scatter(RRTState.q_new(1), RRTState.q_new(2), 'filled', 'MarkerFaceColor', 'm');
@@ -18,6 +20,7 @@ function rrt_plot(RRTState)
     % Set plot limits based on field dimensions
     xlim([0, RRTState.Dimensions.Width]);
     ylim([0, RRTState.Dimensions.Length]);
+    title('APF RRT Algorithm')
 
     hold off
 
