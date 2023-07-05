@@ -20,12 +20,12 @@ disp(['Iteration Completed:',num2str(i)])
 disp(['Iterations :',num2str(RRTState.Final.Iterations)])
 disp(['Distance Travelled :',num2str(RRTState.Final.dist_total)])
 disp(['Time Taken :',num2str(elapsedTime)])
-disp([' '])
+disp(' ') 
 
 end
-Avg_distance = mean(Dist(i));
-Avg_iterations = mean(Iterations(i));
-Avg_time = mean(time(i));
+Avg_distance = mean(Dist);
+Avg_iterations = mean(Iterations);
+Avg_time = mean(time);
 %%
 disp(['Average Iterations over 10 runs:',num2str(Avg_iterations)])
 disp(['Average Distance Travelled over 10 runs:',num2str(Avg_distance)])

@@ -18,6 +18,6 @@ function RRTState = rrtstateinit(pointA,pointB,Dimensions,Obstacles)
        for j= 1:size(RRTState.Obstacles.X(i,:),2)
            RRTState.Obstacles.radius(i,j) = norm([RRTState.Obstacles.X(i,j),RRTState.Obstacles.Y(i,j)] - [RRTState.Obstacles.Centers(i,1) ,RRTState.Obstacles.Centers(i,2)]);
        end
-       RRTState.Obstacles.radius_max(i) = max(RRTState.Obstacles.radius(i,:));
+       RRTState.Obstacles.radius_max(i) = max(RRTState.Obstacles.radius(i,:)) ;
     end
 end
