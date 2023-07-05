@@ -38,7 +38,7 @@ function RRTState = APFRRT(RRTState)
         for i = 1:RRTState.Obstacles.Number
             e_vn = (RRTState.q_new -[RRTState.Obstacles.Centers(i)]) /norm (RRTState.q_new - [RRTState.Obstacles.Centers(i)] );
             
-            if norm(RRTState.Obstacles.Centers(i,:) - RRTState.q_new) < RRTState.Obstacles.radius_max(i)
+            if norm(RRTState.Obstacles.Centers(i,:) - RRTState.q_new) <= RRTState.Obstacles.radius_max(i)
                 F_rep = F_rep + K_rep*e_vn;
             else 
                 F_rep = F_rep + 0 ;
