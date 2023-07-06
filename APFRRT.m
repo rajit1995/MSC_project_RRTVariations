@@ -48,29 +48,29 @@ function RRTState = APFRRT(RRTState)
         RRTState.q_new = RRTState.q_new + F_rep;
         
             q_near_bkp = RRTState.q_near;
-            RRTState = getqnear(RRTState);
+            RRTState = getqnew(RRTState);
        
-
+        RRTState.Branches(RRTState.iteration.count,:) = [RRTState.q_near(1),RRTState.q_near(2),RRTState.q_new(1),RRTState.q_new(2) ]
 
         %RRTState.q_near=RRTState.q_new;
         for i = 1:RRTState.Obstacles.Number
-            [in(i),out(i)] = inpolygon(RRTState.q_near(1), RRTState.q_near(2), RRTState.Obstacles.X(i,:), RRTState.Obstacles.Y(i,:));
+            [in(i),out(i)] = inpolygon(RRTState.q_new(1), RRTState.q_new(2), RRTState.Obstacles.X(i,:), RRTState.Obstacles.Y(i,:));
             indicator = [in,out];
             sum_ind = sum(indicator);
         end
 
         if sum_ind == 0 
               
-                if norm(RRTState.q_near-RRTState.PointB) <= RRTState.Threshold
+                if norm(RRTState.q_new-RRTState.PointB) <= RRTState.Threshold
                     RRTState.GoalReachInd =1;
-                    RRTState.pathvertices(RRTState.iteration.count+1,:) = RRTState.q_near;
+                    RRTState.pathvertices(RRTState.iteration.count+1,:) = RRTState.q_new;
                     RRTState.Final.Iterations = RRTState.iteration.count;
                    
                     
                 end
         
                 if RRTState.GoalReachInd ~=1
-                    RRTState.pathvertices(RRTState.iteration.count+1,:) = RRTState.q_near;
+                    RRTState.pathvertices(RRTState.iteration.count+1,:) = RRTState.q_new;
                 else
                     RRTState.pathvertices(RRTState.iteration.count+1,:) = RRTState.PointB;
                     RRTState.q_near  = RRTState.PointB;
@@ -79,10 +79,14 @@ function RRTState = APFRRT(RRTState)
                 end
         else
             RRTState.q_near = q_near_bkp;
-            continue;
+           continue;
             
         end
+        RRTState = getqnear(RRTState);
         RRTState.iteration.count = RRTState.iteration.count+1;
+        
+
+
     end
 
 end

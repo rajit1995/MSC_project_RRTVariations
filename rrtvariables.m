@@ -10,7 +10,7 @@ obstacleCenters=[22.923178545696597,17.857236168782418;...
     7.085026150145800,8.238076132920797];
 
 pointB = [2,3];
-pointA = [2,24];
+pointA = [20,24];
 q_near = pointA;
 q_new = pointA;
 r_near = 2;
