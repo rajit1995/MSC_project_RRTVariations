@@ -1,9 +1,13 @@
 function RRTState = getqnear(RRTState)
-    if norm(RRTState.q_near - RRTState.q_new) <= RRTState.StepSize
-        RRTState.q_near = RRTState.q_new;
-    else
-        RRTState.q_near = RRTState.q_near + RRTState.StepSize*(RRTState.q_new - RRTState.q_near)/norm((RRTState.q_new - RRTState.q_near));
-        %RRTState.q_near = RRTState.q_new;
-        
-    end   
+   min = 1000000; 
+    for i=1:size(RRTState.pathvertices,1)
+            dist = norm(RRTState.pathvertices(i,:) - RRTState.PointB);
+            if all(size(norm(min))==0) 
+                min = dist;
+                RRTState.q_near = RRTState.pathvertices(i,:);
+            elseif dist<min
+                min = dist;
+                RRTState.q_near = RRTState.pathvertices(i,:);
+            end
+     end
 end

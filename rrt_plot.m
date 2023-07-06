@@ -7,14 +7,18 @@ function rrt_plot(RRTState)
     scatter(RRTState.PointB(1), RRTState.PointB(2), 'filled', 'MarkerFaceColor', 'green');
     %scatter(RRTState.q_new(1), RRTState.q_new(2), 'filled', 'MarkerFaceColor', 'm');
     scatter(RRTState.pathvertices(:,1), RRTState.pathvertices(:,2), 'filled', 'MarkerFaceColor', 'm');
+
     
     for i = 1:RRTState.Obstacles.Number
         fill(RRTState.Obstacles.X(i,:), RRTState.Obstacles.Y(i,:), 'k');
         plot([RRTState.q_near(1), RRTState.Obstacles.Centers(i,1)], [RRTState.q_near(2), RRTState.Obstacles.Centers(i,2)], '--b');
     end
     plot([RRTState.q_near(1), RRTState.PointB(1)], [RRTState.q_near(2), RRTState.PointB(2)], '--b');
-    plot(RRTState.pathvertices(:,1), RRTState.pathvertices(:,2), 'b');
-   
+    %plot(RRTState.pathvertices(:,1), RRTState.pathvertices(:,2), 'b');
+    for i=1:size(RRTState.Branches,1)
+
+        plot([RRTState.Branches(i,1),RRTState.Branches(i,3)],[ RRTState.Branches(i,2),RRTState.Branches(i,4)], 'b');
+    end
     axis equal;
 
     % Set plot limits based on field dimensions
