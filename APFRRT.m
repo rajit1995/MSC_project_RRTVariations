@@ -1,8 +1,8 @@
 function RRTState = APFRRT(RRTState)
-    r_near = 2;
+    r_near = 10;
     K_att = 3;
     K_epd = 2;
-    K_rep = 1.5;
+    K_rep = 2;
     RRTState.q_new = RRTState.PointA;
     RRTState.iteration.count = 1;
     RRTState.q_near = RRTState.PointA;
@@ -19,7 +19,7 @@ function RRTState = APFRRT(RRTState)
 
         %Generating the random point for the next node of RRT
         r_rand = rand()*r_near;
-        e_ng = (RRTState.PointB - RRTState.q_near)/norm((RRTState.PointB - RRTState.q_near));
+        %e_ng = (RRTState.PointB - RRTState.q_near)/norm((RRTState.PointB - RRTState.q_near));
 
         theta = rand;
         Ball_rand = [r_rand*cos(2*pi*theta),r_rand*sin(2*pi*theta)];
@@ -38,7 +38,7 @@ function RRTState = APFRRT(RRTState)
         for i = 1:RRTState.Obstacles.Number
             e_vn = (RRTState.q_new -[RRTState.Obstacles.Centers(i)]) /norm (RRTState.q_new - [RRTState.Obstacles.Centers(i)] );
             
-            if norm(RRTState.Obstacles.Centers(i,:) - RRTState.q_new) <= RRTState.Obstacles.radius_max(i)
+            if norm(RRTState.Obstacles.Centers(i,:) - RRTState.q_new) <= RRTState.Obstacles.radius_max(i)  +1.5
                 F_rep = F_rep + K_rep*e_vn;
             else 
                 F_rep = F_rep + 0 ;
@@ -47,10 +47,10 @@ function RRTState = APFRRT(RRTState)
         
         RRTState.q_new = RRTState.q_new + F_rep;
         
-            q_near_bkp = RRTState.q_near;
+            %q_near_bkp = RRTState.q_near;
             RRTState = getqnew(RRTState);
        
-        RRTState.Branches(RRTState.iteration.count,:) = [RRTState.q_near(1),RRTState.q_near(2),RRTState.q_new(1),RRTState.q_new(2) ]
+%        RRTState.Branches(RRTState.iteration.count,:) = [RRTState.q_near(1),RRTState.q_near(2),RRTState.q_new(1),RRTState.q_new(2) 0];
 
         %RRTState.q_near=RRTState.q_new;
         for i = 1:RRTState.Obstacles.Number
@@ -59,7 +59,7 @@ function RRTState = APFRRT(RRTState)
             sum_ind = sum(indicator);
         end
 
-        if sum_ind == 0 
+        if sum_ind == 0  && norm(RRTState.q_new-RRTState.pathvertices(RRTState.iteration.count,:))> 0.5
               
                 if norm(RRTState.q_new-RRTState.PointB) <= RRTState.Threshold
                     RRTState.GoalReachInd =1;
@@ -71,18 +71,50 @@ function RRTState = APFRRT(RRTState)
         
                 if RRTState.GoalReachInd ~=1
                     RRTState.pathvertices(RRTState.iteration.count+1,:) = RRTState.q_new;
+                  %  RRTState.Branches(RRTState.iteration.count,:) = [RRTState.q_near(1),RRTState.q_near(2),RRTState.q_new(1),RRTState.q_new(2) ];
+
+                    RRTState = rewireRRT(RRTState);
                 else
-                    RRTState.pathvertices(RRTState.iteration.count+1,:) = RRTState.PointB;
+                    RRTState.pathvertices(RRTState.iteration.count+1,:) = RRTState.q_new;
+                    RRTState.pathvertices(RRTState.iteration.count+2,:) = RRTState.PointB;
+                 %   RRTState.Branches(RRTState.iteration.count,:) = [RRTState.q_near(1),RRTState.q_near(2),RRTState.q_new(1),RRTState.q_new(2) ];
+                   
                     RRTState.q_near  = RRTState.PointB;
                     RRTState.q_new  = RRTState.PointB;
                     
                 end
         else
-            RRTState.q_near = q_near_bkp;
+            
            continue;
             
         end
+        q_near_bkp=RRTState.q_near;
         RRTState = getqnear(RRTState);
+
+        
+    %    error = norm(RRTState.q_near - q_near_bkp)
+        if RRTState.q_near == q_near_bkp
+            q_near_count = q_near_count +1;
+        else 
+            q_near_count = 0;
+        end
+
+        if q_near_count > 5 
+                RRTState.StepSize = 5;
+                K_att = 0;
+                K_epd = 2;
+                K_rep = -2;
+        else
+            RRTState.StepSize = 1;
+            K_att = 3;
+            K_epd = 2;
+            K_rep = 1.5;
+           
+        end
+
+
+
+
         RRTState.iteration.count = RRTState.iteration.count+1;
         
 

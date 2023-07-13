@@ -8,10 +8,11 @@ Obstacles.X = obstacleX;
 Obstacles.Y = obstacleY;
 Obstacles.Centers = obstacleCenters;
 
-for i=1:10   
+for i=1:10 
 RRTState = rrtstateinit(pointA,pointB,Dimensions,Obstacles);
 tic;
 RRTState = APFRRT(RRTState);
+
 elapsedTime = toc;
 Dist(i) = RRTState.Final.dist_total;
 Iterations(i) = RRTState.Final.Iterations;
