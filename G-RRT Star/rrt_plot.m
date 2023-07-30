@@ -40,7 +40,7 @@ function rrt_plot(RRTState)
     ylim([0, RRTState.Dimensions.Length]);
     xlabel('x axis')
     ylabel('y axis')
-    title('BASIC RRT Algorithm')
+    title('G-RRT Star Algorithm')
 
     hold off
   

@@ -1,4 +1,4 @@
-    function visualrrt(RRTState)
+function visualrrt(RRTState)
 idx=1;
     if RRTState.iteration.count~=1
         clf(idx)
@@ -6,6 +6,6 @@ idx=1;
         figure(idx)
     end
     rrt_plot(RRTState);
-    pause(0.1)
+    pause(0.001)
    
 end

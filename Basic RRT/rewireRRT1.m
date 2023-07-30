@@ -22,12 +22,14 @@ function RRTState = rewireRRT1(RRTState,~)
             end 
             end
         
-       
+     RRTState = polyintersect(RRTState);
+    if ~RRTState.int_ind
      RRTState.pathvertices(size(RRTState.pathvertices,1)+1,:) =[RRTState.q_new,RRTState.new_node_cost];
     
      RRTState.Branches1(size(RRTState.Branches1,1)+1,:) = [RRTState.nearidx,size(RRTState.pathvertices,1),Branch_ref];
-
-
+    
+        
+    end
 
 
 end
