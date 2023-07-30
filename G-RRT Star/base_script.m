@@ -16,7 +16,7 @@ time = zeros(1,iternum);
 for i=1:iternum 
 RRTState = rrtstateinit(pointA,pointB,Dimensions,Obstacles);
 tic;
-RRTState = RRTBASIC(RRTState);
+RRTState = GRRTSTAR1(RRTState);
 % RRTState = getpath(RRTState);
 elapsedTime = toc;
 Dist(i) = RRTState.Final.dist_total;
