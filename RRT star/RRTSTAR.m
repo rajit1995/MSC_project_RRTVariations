@@ -20,8 +20,8 @@ function RRTState = RRTSTAR(RRTState)
         for i = 1:RRTState.Obstacles.Number
             %RRTState.q_new(1)
             %RRTState.q_new(2)
-            RRTState.Obstacles.X(i,:)
-            RRTState.Obstacles.Y(i,:)
+            % RRTState.Obstacles.X(i,:)
+            % RRTState.Obstacles.Y(i,:)
             [in(i),out(i)] = inpolygon(RRTState.q_new(1), RRTState.q_new(2), RRTState.Obstacles.X(i,:), RRTState.Obstacles.Y(i,:));
             indicator = [in,out];
             sum_ind = sum(indicator);
