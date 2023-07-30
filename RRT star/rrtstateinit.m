@@ -5,6 +5,7 @@ function RRTState = rrtstateinit(pointA,pointB,Dimensions,Obstacles)
     RRTState.Dimensions = Dimensions;
     RRTState.Obstacles = Obstacles;
     RRTState.q_near_count = 0;
+    RRTState.int_ind = 0;
     RRTState.q_near = RRTState.PointA;
     RRTState.q_new = RRTState.PointA;
     RRTState.iteration.count = 1;
@@ -16,7 +17,7 @@ function RRTState = rrtstateinit(pointA,pointB,Dimensions,Obstacles)
     RRTState.Terraincolour = [0.8,0.6,0.4];    
         RRTState.Branches1(1,:) = [1,1,0];
     RRTState.pathvertices(1,:) = [pointA,0];
-    RRTState.StepSize =0.5;
+    RRTState.StepSize =1;
     RRTState.Threshold = 1 ;
     %RRTState.neighborhoodRadius = 25;
    
