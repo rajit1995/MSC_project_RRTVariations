@@ -56,7 +56,7 @@ function RRTState = APFRRT(RRTState)
         in = zeros(1,RRTState.Obstacles.Number);
         out = zeros(1,RRTState.Obstacles.Number);
         for i = 1:RRTState.Obstacles.Number
-            [in(i),out(i)] = inpolygon(RRTState.q_new(1), RRTState.q_new(2), RRTState.Obstacles.X(i,:), RRTState.Obstacles.Y(i,:));
+            [in(i),out(i)] = inpolygon(RRTState.q_new(1), RRTState.q_new(2), RRTState.Obstacles.X1(i,:), RRTState.Obstacles.Y1(i,:));
             indicator = [in,out];
             sum_ind = sum(indicator);
         end
@@ -96,34 +96,34 @@ function RRTState = APFRRT(RRTState)
             
         end
 
-        q_near_bkp=RRTState.q_near;
-        if RRTState.StepSize ~= 5
-            RRTState = getqnear(RRTState);
-        else 
-            RRTState.q_near = RRTState.pathvertices(length(RRTState.pathvertices),1:2);
-        end
-
+        % q_near_bkp=RRTState.q_near;
+        % if RRTState.StepSize ~= 5
+        %     RRTState = getqnear(RRTState);
+        % else 
+        %     RRTState.q_near = RRTState.pathvertices(length(RRTState.pathvertices),1:2);
+        % end
+        RRTState = getqnear(RRTState);
 
         
     %    error = norm(RRTState.q_near - q_near_bkp)
-        if RRTState.q_near == q_near_bkp
-            RRTState.q_near_count = RRTState.q_near_count +1;
-        else 
-            RRTState.q_near_count = 0;
-        end
-
-         if RRTState.q_near_count > 5 
-                RRTState.StepSize = 5;
-                K_att = 0;
-                K_epd = 2;
-                K_rep = 5;
-        else
-            RRTState.StepSize = 1;
-            K_att = 3;
-            K_epd = 2;
-            K_rep = 1.5;
-           
-        end
+        % if RRTState.q_near == q_near_bkp
+        %     RRTState.q_near_count = RRTState.q_near_count +1;
+        % else 
+        %     RRTState.q_near_count = 0;
+        % end
+        % 
+        %  if RRTState.q_near_count > 5 
+        %         RRTState.StepSize = 5;
+        %         K_att = 0;
+        %         K_epd = 2;
+        %         K_rep = 5;
+        % else
+        %     RRTState.StepSize = 1;
+        %     K_att = 3;
+        %     K_epd = 2;
+        %     K_rep = 1.5;
+        % 
+        % end
 
                 if norm(RRTState.q_new-RRTState.PointB) <= RRTState.Threshold
                     RRTState.GoalReachInd =1;
