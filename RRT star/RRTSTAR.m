@@ -22,7 +22,7 @@ function RRTState = RRTSTAR(RRTState)
             %RRTState.q_new(2)
             % RRTState.Obstacles.X(i,:)
             % RRTState.Obstacles.Y(i,:)
-            [in(i),out(i)] = inpolygon(RRTState.q_new(1), RRTState.q_new(2), RRTState.Obstacles.X(i,:), RRTState.Obstacles.Y(i,:));
+            [in(i),out(i)] = inpolygon(RRTState.q_new(1), RRTState.q_new(2), RRTState.Obstacles.X1(i,:), RRTState.Obstacles.Y1(i,:));
             indicator = [in,out];
             sum_ind = sum(indicator);
         end
