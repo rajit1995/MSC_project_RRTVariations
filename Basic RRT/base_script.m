@@ -1,5 +1,6 @@
 clc;
 clearvars;
+
 rrtvariables;
 load("FieldConst.mat");
 Dimensions.Length = Length;
