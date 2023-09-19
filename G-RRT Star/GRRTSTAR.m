@@ -9,7 +9,6 @@ function RRTState = GRRTSTAR(RRTState)
     while RRTState.iteration.count < RRTState.iteration.max
         visualrrt(RRTState);
             %sampling Region
-%         RRTState.q_new = [rand()*RRTState.Dimensions.Length,rand()*RRTState.Dimensions.Width];
             RRTState.R_new2goal = norm(RRTState.q_new-RRTState.PointB);
             if size(RRTState.pathvertices,1) < RRTState.iteration.max*a
                 RRTState.R_new2goal = RRTState.R_new2goal*rand();
@@ -30,11 +29,7 @@ function RRTState = GRRTSTAR(RRTState)
         in = zeros(1,RRTState.Obstacles.Number);
         out = zeros(1,RRTState.Obstacles.Number);
         for i = 1:RRTState.Obstacles.Number
-            %RRTState.q_new(1)
-            %RRTState.q_new(2)
-            % RRTState.Obstacles.X(i,:)
-            % RRTState.Obstacles.Y(i,:)
-            [in(i),out(i)] = inpolygon(RRTState.q_new(1), RRTState.q_new(2), RRTState.Obstacles.X(i,:), RRTState.Obstacles.Y(i,:));
+            [in(i),out(i)] = inpolygon(RRTState.q_new(1), RRTState.q_new(2), RRTState.Obstacles.X1(i,:), RRTState.Obstacles.Y1(i,:));
             indicator = [in,out];
             sum_ind = sum(indicator);
         end

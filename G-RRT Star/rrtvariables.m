@@ -15,5 +15,5 @@ pointB = [20,20];
 q_near = pointA;
 q_new = pointA;
 r_near = 2;
-iternum =20;
+iternum =1;
 RRTState.q_near_count=0;

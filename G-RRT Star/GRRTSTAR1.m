@@ -1,4 +1,4 @@
-function RRTState = GRRTSTAR(RRTState)
+function RRTState = GRRTSTAR1(RRTState)
   
     RRTState.q_new = RRTState.PointA;
     RRTState.iteration.count = 1;
@@ -12,10 +12,9 @@ function RRTState = GRRTSTAR(RRTState)
 %         RRTState.q_new = [rand()*RRTState.Dimensions.Length,rand()*RRTState.Dimensions.Width];
             RRTState.R_new2goal = norm(RRTState.q_new-RRTState.PointB);
             if size(RRTState.pathvertices,1) < RRTState.iteration.max*a
-                RRTState.R_new2goal = RRTState.R_new2goal*rand()
+                RRTState.R_new2goal = RRTState.R_new2goal*rand();
             end
-          
-            
+              
         Ball_rand = [RRTState.R_new2goal*cos(2*pi*rand()),RRTState.R_new2goal*sin(2*pi*rand())];
         RRTState.q_new = RRTState.PointB + Ball_rand;
 
@@ -30,7 +29,7 @@ function RRTState = GRRTSTAR(RRTState)
         in = zeros(1,RRTState.Obstacles.Number);
         out = zeros(1,RRTState.Obstacles.Number);
         for i = 1:RRTState.Obstacles.Number
-            [in(i),out(i)] = inpolygon(RRTState.q_new(1), RRTState.q_new(2), RRTState.Obstacles.X(i,:), RRTState.Obstacles.Y(i,:));
+            [in(i),out(i)] = inpolygon(RRTState.q_new(1), RRTState.q_new(2), RRTState.Obstacles.X1(i,:), RRTState.Obstacles.Y1(i,:));
             indicator = [in,out];
             sum_ind = sum(indicator);
         end
