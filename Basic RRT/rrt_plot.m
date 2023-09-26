@@ -41,8 +41,8 @@ function rrt_plot(RRTState)
     xlabel('x axis')
     ylabel('y axis')
     title('BASIC RRT Algorithm')
-
+    txt = ['Iteration number : ' int2str(RRTState.iteration.count)];
+    subtitle(txt)
     hold off
   
-
 end
