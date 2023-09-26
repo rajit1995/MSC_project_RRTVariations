@@ -14,7 +14,7 @@ function RRTState = getpath(RRTState)
         cost = RRTState.Branches1(i, 3); 
         
         tree{parentIdx} = [tree{parentIdx}; childIdx, cost];
-        %tree{childIdx} = [tree{childIdx}; parentIdx, cost]; % For undirected tree
+        tree{childIdx} = [tree{childIdx}; parentIdx, cost]; % For undirected tree
     end
 
     % Check if start and end nodes are valid
