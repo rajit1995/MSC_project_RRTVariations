@@ -55,7 +55,7 @@ function RRTState = RRTSTAR(RRTState)
         RRTState.iteration.count = RRTState.iteration.count+1;
         
 
-disp( RRTState.iteration.count);
+%disp( RRTState.iteration.count);
     end
       if RRTState.GoalReachInd ==1
                     sz = size(RRTState.Branches1,1);
