@@ -41,7 +41,8 @@ function rrt_plot(RRTState)
     xlabel('x axis')
     ylabel('y axis')
     title('G-RRT Star Algorithm')
-
+    txt = ['Iteration number : ' int2str(RRTState.iteration.count)];
+    subtitle(txt)
     hold off
   
 

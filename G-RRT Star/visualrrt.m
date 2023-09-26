@@ -6,6 +6,6 @@ idx=1;
         figure(idx)
     end
     rrt_plot(RRTState);
-    pause(0.001)
+    pause(0)
    
 end
