@@ -15,6 +15,7 @@ function rrt_plot(RRTState)
             fill(RRTState.Obstacles.X(i,:), RRTState.Obstacles.Y(i,:), [68, 35, 0] / 255);
         end
         
+        plot([RRTState.q_near(1), RRTState.q_new(1)], [RRTState.q_near(2), RRTState.q_new(2)],'--k');
         plot([RRTState.q_near(1), RRTState.Obstacles.Centers(i,1)], [RRTState.q_near(2), RRTState.Obstacles.Centers(i,2)],'--k');
     end
     plot([RRTState.q_near(1), RRTState.PointB(1)], [RRTState.q_near(2), RRTState.PointB(2)], '-k');

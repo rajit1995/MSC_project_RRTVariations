@@ -97,10 +97,12 @@ function RRTState = APFRRT(RRTState)
         end
 
         q_near_bkp=RRTState.q_near;
-        if RRTState.StepSize ~= 5
+        if RRTState.StepSize ~= 5  
             RRTState = getqnear(RRTState);
-        else 
-            RRTState.q_near = RRTState.pathvertices(length(RRTState.pathvertices),1:2);
+        elseif RRTState.StepSize == 5 && RRTState.q_near_count < 10
+             RRTState.q_near = RRTState.pathvertices(length(RRTState.pathvertices),1:2);
+        else
+            RRTState.q_near = RRTState.pathvertices(length(RRTState.pathvertices)-1,1:2);
         end
         RRTState = getqnear(RRTState);
 
@@ -116,7 +118,7 @@ function RRTState = APFRRT(RRTState)
                 RRTState.StepSize = 5;
                
         else
-            RRTState.StepSize = 1;
+            RRTState.StepSize = 0.5;
            
 
         end
@@ -131,7 +133,7 @@ function RRTState = APFRRT(RRTState)
         RRTState.iteration.count = RRTState.iteration.count+1;
         
 
-disp( RRTState.iteration.count);
+% disp( RRTState.iteration.count);
     end
 
 end
