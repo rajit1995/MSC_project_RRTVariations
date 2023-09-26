@@ -102,7 +102,7 @@ function RRTState = GRRTSTAR1(RRTState)
         RRTState.iteration.count = RRTState.iteration.count+1;
         
 
-disp( RRTState.iteration.count);
+%disp( RRTState.iteration.count);
     end
 
 end
