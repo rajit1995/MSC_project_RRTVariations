@@ -1,0 +1,44 @@
+clc;
+clearvars;
+rrtvariables;
+load("FieldConst.mat");
+load("RRTState.mat");
+%%
+Rover.Dimensions = RRTState.Dimensions;
+Rover.Obstacles = RRTState.Obstacles;
+Rover.Kpu = 15;
+Rover.Kiu = 30;
+Rover.kdh = 0.05;
+Rover.Kph = 20;
+Rover.Kih = 0.1;
+Rover.kdu = 0.01;
+Rover.dt = 0.001;
+Rover.e_u_1 = [0 0];
+Rover.u_sur_1 =[0 0];
+Rover.waypoints = RRTState.finalpathvertices(:,1:2);
+Rover.pos_curr = Rover.waypoints(1,1:2);
+
+ for i = 2:size(Rover.waypoints,1)
+    Rover.pos_des = Rover.waypoints(i,1:2);
+    Rover.e_u = Rover.pos_des - Rover.pos_curr;
+    while norm(e_u) > 0.01 
+    Rover.e_u = Rover.pos_des - Rover.pos_curr;
+    Rover.u_sur = Rover.Kpu*Rover.e_u + Rover.Kiu*(Rover.e_u+Rover.e_u_1)*dt/2 + Rover.kdu*(Rover.e_u - e_u_1)/dt;
+    a = (u_sur-u_sur_1)/dt;
+    disp = u_sur_1*dt + 0.5*a*dt*dt;
+
+    Rover.pos_curr = Rover.pos_curr + disp;
+    e_u_1 = e_u;
+
+    u_sur_1 = u_sur;
+%     hold on
+% 
+%     scatter(pointA(1), pointA(2), 'filled', 'MarkerFaceColor', 'red');
+%     scatter(pointB(1), pointB(2), 'filled', 'MarkerFaceColor', 'green');
+%     scatter(pos_curr(1), pos_curr(2), 'filled', 'MarkerFaceColor', 'blue');
+%     hold off
+% 
+    end
+% 
+
+end
