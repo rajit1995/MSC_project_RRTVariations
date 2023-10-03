@@ -13,8 +13,6 @@ Iterations = zeros(1,iternum);
 time1 = zeros(1,iternum);
 time2 = zeros(1,iternum);
 
-
-
 for i=1:iternum 
 RRTState = rrtstateinit(pointA,pointB,Dimensions,Obstacles);
 tic;
@@ -38,14 +36,14 @@ time2(i) = elapsedTime;
 end
 Avg_distance = mean(Dist);
 Avg_iterations = mean(Iterations);
-Avg_time = mean(time);
+Avg_time1 = mean(time1);
+Avg_time2 = mean(time2);
+
 %%
-disp(['Average Iterations over 10 runs:',num2str(Avg_iterations)])
-disp(['Average Distance Travelled over 10 runs:',num2str(Avg_distance)])
-disp(['Average time taken over 10 runs:',num2str(Avg_time)])
-
-
-
+disp(['Average Iterations per run:',num2str(Avg_iterations)])
+disp(['Average Distance of the Path:',num2str(Avg_distance)])
+disp(['Average time taken :',num2str(Avg_time1)])
+disp(['Time taken by the Rover:',num2str(Avg_time2)])
 
 
 
