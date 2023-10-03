@@ -36,9 +36,9 @@ function RRTState = rrtstateinit(pointA,pointB,Dimensions,Obstacles)
     for i = 1:RRTState.Obstacles.Number
     for j = 1 : size(RRTState.Obstacles.X(i,:),2)
            if RRTState.Obstacles.X(i,j) < RRTState.Obstacles.Centers(i,1)
-               RRTState.Obstacles.X1(i,j) = RRTState.Obstacles.X(i,j)-0.5;
+               RRTState.Obstacles.X1(i,j) = RRTState.Obstacles.X(i,j)-0.2;
            elseif RRTState.Obstacles.X(i,j) > RRTState.Obstacles.Centers(i,1)
-               RRTState.Obstacles.X1(i,j) = RRTState.Obstacles.X(i,j)+0.5;
+               RRTState.Obstacles.X1(i,j) = RRTState.Obstacles.X(i,j)+0.2;
            else
                RRTState.Obstacles.X1(i,j) = RRTState.Obstacles.X(i,j);
            end
@@ -46,7 +46,7 @@ function RRTState = rrtstateinit(pointA,pointB,Dimensions,Obstacles)
         for j = 1 : size(RRTState.Obstacles.Y(i,:),2)
            if RRTState.Obstacles.Y(i,j) < RRTState.Obstacles.Centers(i,2)
                RRTState.Obstacles.Y1(i,j) = RRTState.Obstacles.Y(i,j)-0.2;
-           elseif RRTState.Obstacles.Y(i,j) > RRTState.Obstacles.Centers(i,2)
+           elseif RRTState.Obstacles.Y(i,j) > RRTState.Obstacles.Centers(i,1)
                RRTState.Obstacles.Y1(i,j) = RRTState.Obstacles.Y(i,j)+0.2;
            else
                RRTState.Obstacles.Y1(i,j) = RRTState.Obstacles.Y(i,j);
