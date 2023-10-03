@@ -5,7 +5,6 @@ function RRTState = rrtstateinit(pointA,pointB,Dimensions,Obstacles)
     RRTState.Dimensions = Dimensions;
     RRTState.Obstacles = Obstacles;
     RRTState.q_near_count = 0;
-    RRTState.int_ind = 0;
     RRTState.q_near = RRTState.PointA;
     RRTState.q_new = RRTState.PointA;
     RRTState.iteration.count = 1;
@@ -17,10 +16,10 @@ function RRTState = rrtstateinit(pointA,pointB,Dimensions,Obstacles)
     RRTState.Terraincolour = [0.8,0.6,0.4];    
         RRTState.Branches1(1,:) = [1,1,0];
     RRTState.pathvertices(1,:) = [pointA,0];
-    RRTState.StepSize =1;
+    RRTState.StepSize =0.5;
     RRTState.Threshold = 1 ;
     %RRTState.neighborhoodRadius = 25;
-  % theta = 36;
+    % theta = 36;
     %         theta_rad = theta*pi/180;
     RRTState.GoalReachInd =0;
     for i = 1:RRTState.Obstacles.Number
@@ -37,9 +36,9 @@ function RRTState = rrtstateinit(pointA,pointB,Dimensions,Obstacles)
     for i = 1:RRTState.Obstacles.Number
     for j = 1 : size(RRTState.Obstacles.X(i,:),2)
            if RRTState.Obstacles.X(i,j) < RRTState.Obstacles.Centers(i,1)
-               RRTState.Obstacles.X1(i,j) = RRTState.Obstacles.X(i,j)-0.5;
+               RRTState.Obstacles.X1(i,j) = RRTState.Obstacles.X(i,j)-0.2;
            elseif RRTState.Obstacles.X(i,j) > RRTState.Obstacles.Centers(i,1)
-               RRTState.Obstacles.X1(i,j) = RRTState.Obstacles.X(i,j)+0.5;
+               RRTState.Obstacles.X1(i,j) = RRTState.Obstacles.X(i,j)+0.2;
            else
                RRTState.Obstacles.X1(i,j) = RRTState.Obstacles.X(i,j);
            end
@@ -47,11 +46,12 @@ function RRTState = rrtstateinit(pointA,pointB,Dimensions,Obstacles)
         for j = 1 : size(RRTState.Obstacles.Y(i,:),2)
            if RRTState.Obstacles.Y(i,j) < RRTState.Obstacles.Centers(i,2)
                RRTState.Obstacles.Y1(i,j) = RRTState.Obstacles.Y(i,j)-0.2;
-           elseif RRTState.Obstacles.Y(i,j) > RRTState.Obstacles.Centers(i,2)
+           elseif RRTState.Obstacles.Y(i,j) > RRTState.Obstacles.Centers(i,1)
                RRTState.Obstacles.Y1(i,j) = RRTState.Obstacles.Y(i,j)+0.2;
            else
                RRTState.Obstacles.Y1(i,j) = RRTState.Obstacles.Y(i,j);
            end
         end
+
     end
 end
