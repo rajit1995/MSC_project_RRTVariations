@@ -14,16 +14,19 @@ function rover_plot(Rover)
         else
             fill(Rover.Obstacles.X(i,:), Rover.Obstacles.Y(i,:), [68, 35, 0] / 255);
         end
-        
+
     end
-   
+    for branchidx=1:size(Rover.Travel,1)     
+     plot([Rover.Travel(:,1)],  [Rover.Travel(:,2)],'r','LineWidth',2)
+    end
+      scatter(Rover.waypoints(:,1), Rover.waypoints(:,2), 'MarkerFaceColor', 'k');
   
     for branchidx=1:size(Rover.waypoints,1)     
-     plot([Rover.waypoints(:,1)],  [Rover.waypoints(:,2)],'r','LineWidth',2)
+     plot([Rover.waypoints(:,1)],  [Rover.waypoints(:,2)],'k--','LineWidth',1)
     end
-      for branchidx=1:size(Rover.Travel,1)     
-     plot([Rover.Travel(:,1)],  [Rover.Travel(:,2)],'b--','LineWidth',2)
-    end
+
+
+   
     % r = Rover.Radius;
     % pos = Rover.pos_curr;
       rectangle('Position',[Rover.pos_curr(1)-Rover.Radius, Rover.pos_curr(2)-Rover.Radius, 2*Rover.Radius, 2*Rover.Radius],'Curvature', [1,1], 'FaceColor','w')
@@ -42,6 +45,7 @@ function rover_plot(Rover)
     ylim([0, Rover.Dimensions.Length]);
     xlabel('x axis')
     ylabel('y axis')
+    
     title('Rover model')
     hold off
   
