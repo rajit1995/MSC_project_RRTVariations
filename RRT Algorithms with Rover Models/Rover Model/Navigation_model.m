@@ -6,8 +6,8 @@ load("RRTState.mat");
 %%
 Rover.PointA = RRTState.PointA;
 Rover.PointB = RRTState.PointB;
-Rover.Length = 0.2488;
-Rover.Width = 0.35;
+Rover.Length = 0.35;
+Rover.Width = 0.2488;
 Rover.Radius = 0.5*norm([Rover.Length Rover.Width]);
 Rover.Dimensions = RRTState.Dimensions;
 Rover.Obstacles = RRTState.Obstacles;

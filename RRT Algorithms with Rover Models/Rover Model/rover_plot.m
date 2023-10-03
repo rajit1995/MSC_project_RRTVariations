@@ -27,8 +27,8 @@ function rover_plot(Rover)
     % r = Rover.Radius;
     % pos = Rover.pos_curr;
       rectangle('Position',[Rover.pos_curr(1)-Rover.Radius, Rover.pos_curr(2)-Rover.Radius, 2*Rover.Radius, 2*Rover.Radius],'Curvature', [1,1], 'FaceColor','w')
-        dir = Rover.u_sur/norm(Rover.u_sur);
-    plot([Rover.pos_curr(1),Rover.pos_curr(1)+dir(1)*Rover.Radius],[Rover.pos_curr(2), Rover.pos_curr(2)+dir(2)*Rover.Radius],'LineWidth', 0.3,'Color','k');
+    %     dir = Rover.u_sur/norm(Rover.u_sur);
+    % plot([Rover.pos_curr(1),Rover.pos_curr(1)+dir(1)*Rover.Radius],[Rover.pos_curr(2), Rover.pos_curr(2)+dir(2)*Rover.Radius],'LineWidth', 0.3,'Color','k');
     
     % sz = 100
     % scatter(Rover.pos_curr(1), Rover.pos_curr(2),sz,'square', 'filled', 'MarkerFaceColor', 'blue');
